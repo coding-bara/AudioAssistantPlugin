@@ -3,7 +3,7 @@ namespace Loupedeck.AudioAssistantPlugin {
   using System.IO;
   using System.Reflection;
 
-  internal static class PluginResources {
+  internal static class Resources {
     private static Assembly _assembly;
 
     public static void Init(Assembly assembly) {

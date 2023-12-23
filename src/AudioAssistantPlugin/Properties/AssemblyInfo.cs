@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Audio Assistant Plugin for Loupedeck")]
-[assembly: AssemblyDescription("Enables switching between headset and loudspeakers. In addition, the input/output volume can be adjusted, muted or unmuted.")]
+[assembly: AssemblyDescription("Allows to control audio input and output devices.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Return Null")]
 [assembly: AssemblyProduct("Audio Assistant")]

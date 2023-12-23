@@ -35,6 +35,17 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug with Logging|AnyCPU' ">
+      <DebugSymbols>true</DebugSymbols>
+      <DebugType>full</DebugType>
+      <Optimize>false</Optimize>
+      <DefineConstants>LOGGING;DEBUG;TRACE</DefineConstants>
+      <ErrorReport>prompt</ErrorReport>
+      <WarningLevel>4</WarningLevel>
+      <StartAction>Program</StartAction>
+      <StartProgram>C:\Program Files %28x86%29\Loupedeck\Loupedeck2\Loupedeck2.exe</StartProgram>
+      <OutputPath>C:\Users\Max\AppData\Local\Loupedeck\Plugins\AudioAssistant\win\</OutputPath>
+    </PropertyGroup>
     <ItemGroup>
         <Reference Include="PluginApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
             <SpecificVersion>False</SpecificVersion>
@@ -52,19 +63,81 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Action\AudioActionBaseControl.cs"/>
+        <Compile Include="Action\AudioActionBaseSwitch.cs"/>
+        <Compile Include="Action\Input\AudioActionInputControl.cs"/>
+        <Compile Include="Action\Input\AudioActionInputSwitch.cs"/>
+        <Compile Include="Action\Output\AudioActionOutputControl.cs"/>
+        <Compile Include="Action\Output\AudioActionOutputSwitch.cs"/>
+        <Compile Include="Device\AudioDevice.cs"/>
+        <Compile Include="Device\AudioDeviceAPI.cs"/>
+        <Compile Include="Device\AudioDeviceConfig.cs"/>
+        <Compile Include="Device\AudioDeviceActive.cs"/>
+        <Compile Include="Device\AudioDeviceState.cs"/>
+        <Compile Include="Device\AudioDeviceStateMonitoring.cs"/>
+        <Compile Include="Helpers\GenericAPI.cs"/>
+        <Compile Include="Helpers\Config.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="AudioAssistantApplication.cs"/>
-        <Compile Include="AudioAssistantPlugin.cs"/>
-        <Compile Include="Helpers\PluginLog.cs"/>
-        <Compile Include="Helpers\PluginResources.cs"/>
-        <Compile Include="Actions\CounterAdjustment.cs"/>
-        <Compile Include="Actions\CounterCommand.cs"/>
+        <Compile Include="AudioAssistant.cs"/>
+        <Compile Include="Helpers\Logger.cs"/>
+        <Compile Include="Helpers\Resources.cs"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="metadata\LoupedeckPackage.yaml"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Resources\"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\Executables\svcl.exe">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size50x50\Output.Muted.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size50x50\Output.Normal.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size50x50\Input.Muted.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size50x50\Input.Normal.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Headset.NoOtherOptionsConfigured.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Headset.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Speaker.NoOtherOptionsConfigured.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Speaker.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Microphone.NoOtherOptionsConfigured.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Microphone.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headset.NoOtherOptionsConfigured.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headset.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.NoOtherOptionsConfigured.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <PropertyGroup>
