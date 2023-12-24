@@ -4,6 +4,6 @@
     protected override AudioDevice OptionA => AudioAssistant.InputA;
     protected override AudioDevice OptionB => AudioAssistant.InputB;
 
-    public AudioActionInputSwitch() : base("Audio Input Switch", "Switch between input devices.", "Input") { }
+    public AudioActionInputSwitch() : base("Audio Input Switch", "You can switch between input device option a and b.", "Input") { }
   }
 }

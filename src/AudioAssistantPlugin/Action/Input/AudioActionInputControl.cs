@@ -2,6 +2,6 @@
   public class AudioActionInputControl : AudioActionBaseControl {
     protected override AudioDeviceActive Current => AudioAssistant.InputActive;
 
-    public AudioActionInputControl() : base("Audio Input Control", "Adjust, mute or unmute the input volume of the active input device.", "Input") { }
+    public AudioActionInputControl() : base("Audio Input Control", "You can adjust the input device volume and mute or unmute the input device.", "Input") { }
   }
 }
