@@ -36,15 +36,15 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug with Logging|AnyCPU' ">
-      <DebugSymbols>true</DebugSymbols>
-      <DebugType>full</DebugType>
-      <Optimize>false</Optimize>
-      <DefineConstants>LOGGING;DEBUG;TRACE</DefineConstants>
-      <ErrorReport>prompt</ErrorReport>
-      <WarningLevel>4</WarningLevel>
-      <StartAction>Program</StartAction>
-      <StartProgram>C:\Program Files %28x86%29\Loupedeck\Loupedeck2\Loupedeck2.exe</StartProgram>
-      <OutputPath>C:\Users\Max\AppData\Local\Loupedeck\Plugins\AudioAssistant\win\</OutputPath>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <DefineConstants>LOGGING;DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <StartAction>Program</StartAction>
+        <StartProgram>C:\Program Files %28x86%29\Loupedeck\Loupedeck2\Loupedeck2.exe</StartProgram>
+        <OutputPath>C:\Users\Max\AppData\Local\Loupedeck\Plugins\AudioAssistant\win\</OutputPath>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="PluginApi, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -87,10 +87,10 @@
         <None Include="metadata\LoupedeckPackage.yaml"/>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
+        <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Resources\"/>
+        <Folder Include="Resources\" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="Resources\Executables\svcl.exe">
@@ -138,6 +138,14 @@
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\Executables\readme.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resources\Executables\svcl.chm">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <PropertyGroup>
