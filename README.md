@@ -85,7 +85,7 @@ If you need the x32 version, you can download it [here](https://www.nirsoft.net/
 # 4. How to support, give feedback or contribute?
 
 * You found a bug?
-I would love to hear about it [here](https://github.com/coding-bara/AudioAssistantPlugin/issues/new/choose).
+I would love to hear about it [here](https://github.com/coding-bara/Loupedeck-AudioAssistantPlugin/issues/new/choose).
 
 * You have a feature request?
 Feel free to fork the repository and create some PR's.
