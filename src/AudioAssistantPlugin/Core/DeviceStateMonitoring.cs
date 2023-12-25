@@ -3,13 +3,13 @@
   using System.Collections.Generic;
   using System.Threading;
 
-  public class AudioDeviceStateMonitoring {
+  public class DeviceStateMonitoring {
     private readonly CancellationTokenSource _cts = new CancellationTokenSource();
     private readonly Thread _thread;
-    private readonly List<AudioDevice> _devices;
+    private readonly List<Device> _devices;
     private readonly Int32 _monitoringRateInMs;
 
-    public AudioDeviceStateMonitoring(Config config, List<AudioDevice> devices) {
+    public DeviceStateMonitoring(Config config, List<Device> devices) {
       _monitoringRateInMs = config.MonitoringRateInMS;
       _devices = devices;
 
@@ -46,7 +46,7 @@
       };
     }
 
-    private void ThreadedDeviceMonitoring(String name, AudioDeviceAPI api, AudioDeviceState state) {
+    private void ThreadedDeviceMonitoring(String name, DeviceAPI api, DeviceState state) {
       try {
         if (api.IsDefault()) {
           state.IsMuted = api.IsMuted();

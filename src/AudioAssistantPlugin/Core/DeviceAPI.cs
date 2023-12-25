@@ -1,10 +1,10 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
 
-  public class AudioDeviceAPI : GenericAPI {
+  public class DeviceAPI : GenericAPI {
     protected readonly String _name;
 
-    public AudioDeviceAPI(String exePath, String name) : base(exePath) {
+    public DeviceAPI(String exePath, String name) : base(exePath) {
       _name = name;
     }
 

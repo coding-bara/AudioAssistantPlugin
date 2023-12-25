@@ -1,7 +1,7 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
 
-  public class AudioDeviceState {
+  public class DeviceState {
     private Int32 _volume;
     private Boolean _isMuted;
 

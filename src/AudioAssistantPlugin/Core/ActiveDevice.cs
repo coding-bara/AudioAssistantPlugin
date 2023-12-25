@@ -2,18 +2,18 @@
   using System;
   using System.IO;
 
-  public class AudioDeviceActive {
-    public delegate void SwitchEvent(AudioDevice currentDevice, AudioDevice nextDevice);
+  public class ActiveDevice {
+    public delegate void SwitchEvent(Device currentDevice, Device nextDevice);
     public event SwitchEvent PreSwitch;
 
     private readonly String _type;
-    private AudioDevice _instance;
+    private Device _instance;
 
-    public AudioDeviceActive(String type) {
+    public ActiveDevice(String type) {
       _type = type;
     }
 
-    public AudioDevice Instance {
+    public Device Instance {
       get => _instance;
       set {
         var currentDevice = _instance;

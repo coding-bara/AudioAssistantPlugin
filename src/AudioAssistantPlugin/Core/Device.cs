@@ -1,18 +1,18 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
 
-  public class AudioDevice {
-    private readonly AudioDeviceAPI _api;
-    private readonly AudioDeviceState _state;
+  public class Device {
+    private readonly DeviceAPI _api;
+    private readonly DeviceState _state;
     private readonly String _name;
     private readonly String _type;
 
-    public AudioDevice(AudioDeviceAPI api, String name, String type) {
+    public Device(DeviceAPI api, String name, String type) {
       _api = api;
       _name = name;
       _type = type;
 
-      _state = new AudioDeviceState();
+      _state = new DeviceState();
     }
 
     public void Init() {
@@ -20,15 +20,15 @@
       _state.Volume = _api.GetVolume();
     }
 
-    public event AudioDeviceState.StateChangedEvent StateChanged {
+    public event DeviceState.StateChangedEvent StateChanged {
       add => _state.StateChanged += value;
       remove => _state.StateChanged -= value;
     }
 
     public String Name => _name;
     public String Type => _type;
-    public AudioDeviceAPI API => _api;
-    public AudioDeviceState State => _state;
+    public DeviceAPI API => _api;
+    public DeviceState State => _state;
 
     public void ChangeVolume(Int32 volumeStep) {
       if (_state.IsMuted)

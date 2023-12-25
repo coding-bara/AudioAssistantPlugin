@@ -4,11 +4,11 @@
 
   [Serializable]
   public class Config {
-    public AudioDeviceConfig OutputA { get; set; }
-    public AudioDeviceConfig OutputB { get; set; }
+    public DeviceConfig OutputA { get; set; }
+    public DeviceConfig OutputB { get; set; }
 
-    public AudioDeviceConfig InputA { get; set; }
-    public AudioDeviceConfig InputB { get; set; }
+    public DeviceConfig InputA { get; set; }
+    public DeviceConfig InputB { get; set; }
 
     public String ExePath { get; set; }
     public Int32 MonitoringRateInMS { get; set; }
@@ -29,11 +29,11 @@
 
     private static Config UseDefaultConfig(String configFilePath) {
       var defaultConfig = new Config {
-        InputA = new AudioDeviceConfig {
+        InputA = new DeviceConfig {
           Name = "Microphone",
           Type = "Microphone"
         },
-        OutputA = new AudioDeviceConfig {
+        OutputA = new DeviceConfig {
           Name = "Headset",
           Type = "Headset"
         }
@@ -67,7 +67,7 @@
         existingConfig.MonitoringRateInMS = 2500;
 
       if (existingConfig.OutputB == default)
-        existingConfig.OutputB = new AudioDeviceConfig {
+        existingConfig.OutputB = new DeviceConfig {
           Name = "-",
           Type = "-"
         };
@@ -79,7 +79,7 @@
         existingConfig.OutputB.Type = "-";
 
       if (existingConfig.InputB == default)
-        existingConfig.InputB = new AudioDeviceConfig {
+        existingConfig.InputB = new DeviceConfig {
           Name = "-",
           Type = "-"
         };

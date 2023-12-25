@@ -9,16 +9,16 @@ namespace Loupedeck.AudioAssistantPlugin {
 
     public static String RootPath;
 
-    public static AudioDevice OutputA;
-    public static AudioDevice OutputB;
+    public static Device OutputA;
+    public static Device OutputB;
 
-    public static AudioDevice InputA;
-    public static AudioDevice InputB;
+    public static Device InputA;
+    public static Device InputB;
 
-    public static AudioDeviceActive OutputActive;
-    public static AudioDeviceActive InputActive;
+    public static ActiveDevice ActiveOutput;
+    public static ActiveDevice ActiveInput;
 
-    public readonly AudioDeviceStateMonitoring _stateMonitoring;
+    public readonly DeviceStateMonitoring _stateMonitoring;
 
     public AudioAssistant() {
       Logger.Init(Log);
@@ -28,17 +28,17 @@ namespace Loupedeck.AudioAssistantPlugin {
 
       var config = Config.CreateOrLoad();
 
-      OutputActive = new AudioDeviceActive("Output");
-      OutputA = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.OutputA.Name), config.OutputA.Name, config.OutputA.Type);
-      OutputB = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.OutputB.Name), config.OutputB.Name, config.OutputB.Type);
+      ActiveOutput = new ActiveDevice("Output");
+      OutputA = new Device(new DeviceAPI(config.ExePath, config.OutputA.Name), config.OutputA.Name, config.OutputA.Type);
+      OutputB = new Device(new DeviceAPI(config.ExePath, config.OutputB.Name), config.OutputB.Name, config.OutputB.Type);
 
-      InputActive = new AudioDeviceActive("Input");
-      InputA = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.InputA.Name), config.InputA.Name, config.InputA.Type);
-      InputB = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.InputB.Name), config.InputB.Name, config.InputB.Type);
+      ActiveInput = new ActiveDevice("Input");
+      InputA = new Device(new DeviceAPI(config.ExePath, config.InputA.Name), config.InputA.Name, config.InputA.Type);
+      InputB = new Device(new DeviceAPI(config.ExePath, config.InputB.Name), config.InputB.Name, config.InputB.Type);
 
-      _stateMonitoring = new AudioDeviceStateMonitoring(
+      _stateMonitoring = new DeviceStateMonitoring(
         config,
-        new List<AudioDevice> {
+        new List<Device> {
           OutputA,
           OutputB,
           InputA,
@@ -54,17 +54,17 @@ namespace Loupedeck.AudioAssistantPlugin {
       OutputB.Init();
 
       if (OutputA.IsDefault())
-        OutputActive.Instance = OutputA;
+        ActiveOutput.Instance = OutputA;
       else
-        OutputActive.Instance = OutputB;
+        ActiveOutput.Instance = OutputB;
 
       InputA.Init();
       InputB.Init();
 
       if (InputA.IsDefault())
-        InputActive.Instance = InputA;
+        ActiveInput.Instance = InputA;
       else
-        InputActive.Instance = InputB;
+        ActiveInput.Instance = InputB;
 
       _stateMonitoring.Start();
     }

@@ -63,25 +63,25 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Action\AudioActionBaseControl.cs"/>
-        <Compile Include="Action\AudioActionBaseSwitch.cs"/>
-        <Compile Include="Action\Input\AudioActionInputControl.cs"/>
-        <Compile Include="Action\Input\AudioActionInputSwitch.cs"/>
-        <Compile Include="Action\Output\AudioActionOutputControl.cs"/>
-        <Compile Include="Action\Output\AudioActionOutputSwitch.cs"/>
-        <Compile Include="Device\AudioDevice.cs"/>
-        <Compile Include="Device\AudioDeviceAPI.cs"/>
-        <Compile Include="Device\AudioDeviceConfig.cs"/>
-        <Compile Include="Device\AudioDeviceActive.cs"/>
-        <Compile Include="Device\AudioDeviceState.cs"/>
-        <Compile Include="Device\AudioDeviceStateMonitoring.cs"/>
-        <Compile Include="Helpers\GenericAPI.cs"/>
-        <Compile Include="Helpers\Config.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="AudioAssistantApplication.cs"/>
         <Compile Include="AudioAssistant.cs"/>
-        <Compile Include="Helpers\Logger.cs"/>
-        <Compile Include="Helpers\Resources.cs"/>
+        <Compile Include="Actions\ActionBaseControl.cs"/>
+        <Compile Include="Actions\ActionBaseSwitch.cs"/>
+        <Compile Include="Actions\Input\ActionInputControl.cs"/>
+        <Compile Include="Actions\Input\ActionInputSwitch.cs"/>
+        <Compile Include="Actions\Output\ActionOutputControl.cs"/>
+        <Compile Include="Actions\Output\ActionOutputSwitch.cs"/>
+        <Compile Include="Core\Device.cs"/>
+        <Compile Include="Core\DeviceAPI.cs"/>
+        <Compile Include="Core\DeviceConfig.cs"/>
+        <Compile Include="Core\ActiveDevice.cs"/>
+        <Compile Include="Core\DeviceState.cs"/>
+        <Compile Include="Core\DeviceStateMonitoring.cs"/>
+        <Compile Include="Utils\GenericAPI.cs"/>
+        <Compile Include="Utils\Config.cs"/>
+        <Compile Include="Utils\Logger.cs"/>
+        <Compile Include="Utils\Resources.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
         <None Include="metadata\LoupedeckPackage.yaml"/>
