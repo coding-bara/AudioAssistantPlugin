@@ -1,5 +1,6 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
+  using System.IO;
 
   public class AudioDeviceActive {
     public delegate void SwitchEvent(AudioDevice currentDevice, AudioDevice nextDevice);
@@ -26,21 +27,21 @@
     }
 
     public BitmapImage GetDialIcon() {
-      var resourceName = Instance.State.IsMuted
-        ? $"{GetIconBasePath(50)}.{_type}.Muted.png"
-        : $"{GetIconBasePath(50)}.{_type}.Normal.png";
+      var filePath = Instance.State.IsMuted
+        ? Path.Combine(GetIconBasePath(50), $"{_type}.Muted.png")
+        : Path.Combine(GetIconBasePath(50), $"{_type}.Normal.png");
 
-      return EmbeddedResources.ReadImage(resourceName);
+      return BitmapImage.FromFile(filePath);
     }
 
     public BitmapImage GetButtonIcon(String state = default) {
-      var resourceName = state != default
-        ? $"{GetIconBasePath(80)}.{_type}.{Instance.Type}.{state}.png"
-        : $"{GetIconBasePath(80)}.{_type}.{Instance.Type}.png";
+      var filePath = state != default
+        ? Path.Combine(GetIconBasePath(80), _type, $"{Instance.Type}.{state}.png")
+        : Path.Combine(GetIconBasePath(80), _type, $"{Instance.Type}.png");
 
-      return EmbeddedResources.ReadImage(resourceName);
+      return BitmapImage.FromFile(filePath);
     }
 
-    private String GetIconBasePath(Int32 size) => $"{nameof(Loupedeck)}.{nameof(AudioAssistantPlugin)}.Resources.Icons.Size{size}x{size}";
+    private String GetIconBasePath(Int32 size) => Path.Combine(AudioAssistant.RootPath, "Resources", "Icons", $"Size{size}x{size}");
   }
 }

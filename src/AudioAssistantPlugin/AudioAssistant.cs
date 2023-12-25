@@ -1,10 +1,13 @@
 namespace Loupedeck.AudioAssistantPlugin {
   using System;
   using System.Collections.Generic;
+  using System.IO;
 
   public class AudioAssistant : Plugin {
     public override Boolean UsesApplicationApiOnly => true;
     public override Boolean HasNoApplication => true;
+
+    public static String RootPath;
 
     public static AudioDevice OutputA;
     public static AudioDevice OutputB;
@@ -21,15 +24,17 @@ namespace Loupedeck.AudioAssistantPlugin {
       Logger.Init(Log);
       Resources.Init(Assembly);
 
+      RootPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), nameof(Loupedeck), "Plugins", nameof(AudioAssistant), "win");
+
       var config = Config.CreateOrLoad();
 
       OutputActive = new AudioDeviceActive("Output");
-      OutputA = new AudioDevice(new AudioDeviceAPI(config.ExecutablePath, config.OutputA.Name), config.OutputA.Name, config.OutputA.Type);
-      OutputB = new AudioDevice(new AudioDeviceAPI(config.ExecutablePath, config.OutputB.Name), config.OutputB.Name, config.OutputB.Type);
+      OutputA = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.OutputA.Name), config.OutputA.Name, config.OutputA.Type);
+      OutputB = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.OutputB.Name), config.OutputB.Name, config.OutputB.Type);
 
       InputActive = new AudioDeviceActive("Input");
-      InputA = new AudioDevice(new AudioDeviceAPI(config.ExecutablePath, config.InputA.Name), config.InputA.Name, config.InputA.Type);
-      InputB = new AudioDevice(new AudioDeviceAPI(config.ExecutablePath, config.InputB.Name), config.InputB.Name, config.InputB.Type);
+      InputA = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.InputA.Name), config.InputA.Name, config.InputA.Type);
+      InputB = new AudioDevice(new AudioDeviceAPI(config.ExePath, config.InputB.Name), config.InputB.Name, config.InputB.Type);
 
       _stateMonitoring = new AudioDeviceStateMonitoring(
         config,

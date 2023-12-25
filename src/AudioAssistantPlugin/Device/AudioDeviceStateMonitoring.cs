@@ -23,10 +23,12 @@
     }
 
     public void Stop() {
-      _cts.Cancel();
-      _cts.Dispose();
+      if (_cts != null) {
+        _cts.Cancel();
+        _cts.Dispose();
+      }
 
-      _thread.Join();
+      _thread?.Join();
     }
 
     private ThreadStart ThreadedMonitoring() {

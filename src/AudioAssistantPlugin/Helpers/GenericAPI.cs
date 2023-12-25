@@ -3,10 +3,10 @@
   using System.Diagnostics;
 
   public class GenericAPI {
-    private readonly String _executablePath;
+    private readonly String _exePath;
 
-    protected GenericAPI(String executablePath) {
-      _executablePath = executablePath;
+    protected GenericAPI(String exePath) {
+      _exePath = exePath;
     }
 
     protected delegate T ParseRawOutputCallback<T>(String[] rawOutput);
@@ -16,7 +16,7 @@
 
       try {
         var process = new Process {
-          StartInfo = new ProcessStartInfo(_executablePath, command) {
+          StartInfo = new ProcessStartInfo(_exePath, command) {
             UseShellExecute = false,
             RedirectStandardOutput = true,
             CreateNoWindow = true
@@ -37,10 +37,10 @@
         parsedOutput = parseRawOutputCallback.Invoke(rawOutput);
 
         #if LOGGING
-        Logger.Verbose($"'{_executablePath} {command}' succeeded with output: {parsedOutput}. ({exitCode})");
+        Logger.Verbose($"'{_exePath} {command}' succeeded with output: {parsedOutput}. ({exitCode})");
         #endif
       } catch (Exception e) {
-        Logger.Error(e, $"'{_executablePath} {command}' failed with message: '{e.Message}'.");
+        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}'.");
       }
 
       return parsedOutput;
@@ -49,7 +49,7 @@
     protected void RunCommand(String command) {
       try {
         var process = new Process {
-          StartInfo = new ProcessStartInfo(_executablePath, command) {
+          StartInfo = new ProcessStartInfo(_exePath, command) {
             UseShellExecute = false,
             RedirectStandardOutput = true,
             CreateNoWindow = true
@@ -64,10 +64,10 @@
 
         process.Close();
         #if LOGGING
-        Logger.Verbose($"'{_executablePath} {command}' succeeded. ({exitCode})");
+        Logger.Verbose($"'{_exePath} {command}' succeeded. ({exitCode})");
         #endif
       } catch (Exception e) {
-        Logger.Error(e, $"'{_executablePath} {command}' failed with message: '{e.Message}'.");
+        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}'.");
       }
     }
   }

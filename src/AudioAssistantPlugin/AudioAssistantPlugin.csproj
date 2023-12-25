@@ -85,15 +85,24 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="metadata\LoupedeckPackage.yaml"/>
+        <EmbeddedResource Include="metadata\Icon256x256.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config" />
+        <None Include="App.config"/>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Resources\" />
+        <Folder Include="Resources\"/>
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Include="Resources\Executables\svcl.exe">
+        <EmbeddedResource Include="Resources\SoundVolumeCommandLine\svcl.exe">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\SoundVolumeCommandLine\svcl.chm">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\SoundVolumeCommandLine\readme.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size50x50\Output.Muted.png">
@@ -138,14 +147,6 @@
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Include="Resources\Executables\readme.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Resources\Executables\svcl.chm">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <PropertyGroup>

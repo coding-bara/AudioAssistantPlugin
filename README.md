@@ -20,46 +20,67 @@ If you need the x32 version, you can download it [here](https://www.nirsoft.net/
 
 * There is only a Windows version of the plugin.
 * There are no plausibility checks, so expect Loupedesk.exe to crash if you accidentally configure it incorrectly.
+* Settings a non-configured input/output device as default will crash the plugin.
+* Only two input/output device options are supported. (`outputA`/`outputB`, `inputA`/`inputB`)
 
 # 3. How to setup?
 
-1. Install a binary release of the plugin.
-2. Fire up Loupedeck. A default `config.json` has now been generated for you.
-3. You can find the `config.json` here: `%userprofile%\.loupedeck\audio-assistant`.
-4. Edit it to your needs, like described in here:
+1. Fire up Loupedeck.
+2. Install a binary release of the plugin.
+3. Restart Loupedeck. A default `config.json` has now been generated for you.
+4. You can find the `config.json` in here: `%userprofile%\.loupedeck\audio-assistant`.
+5. Edit it to your needs, like described below:
+   ```json5
+    // entire, possible config.json
+    {
+      // Option A, needs to be specified
+      "outputA": {
+        "name": "Headset", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
+        "type": "Headset" // Use one of these: "Speaker", "Headphones or "Headset".
+      },
+      // Option B, only needs to be specified if you also have another output device.
+      "outputB": {
+        "name": "Desk Speaker", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
+        "type": "Speaker" // Use one of these: "Speaker", "Headphones or "Headset".
+      },
+      // Option A, needs to be specified
+      "inputA": {
+        "name": "Headset", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
+        "type": "Headset" // Use one of these: "Headset" or "Microphone".
+      },
+      // Option B, only needs to be specified if you also have another input device.
+      "inputB": {
+        "name": "Desk Microphone", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
+        "type": "Microphone" // Use one of these: "Headset" or "Microphone".
+      },
+      // Only needs to be specified if you want to control the sync rate with Windows.
+      // The default is at "2500" milliseconds.
+      // Reduce the value if you need it to be more accurate.
+      // Increase it, if you want to reduce the system load.
+      "monitoringRateInMS": 2500,
+      // Only needs to be specified if you need the x32 version of SoundVolumeCommandLine.
+      // The path has to be absolute.
+      "exePath": "C:\\your\\path\\to\\svcl.exe",
+    }
+    ```
     ```json5
+    // example config.json
     {
       "outputA": {
-        // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
-        "name": "Headset Max",
-        // Use one of these for an input device: "Headset", "Microphone" or "-" and use one of these for an output device: "Headset", "Headphones", "Speaker" or  "-".
-        // You always need "outputA" and "inputA" to be configured.
-        // Both, "outputB" and "inputB" are optional, but both have to be configured with a "-".
+        "name": "Headset",
         "type": "Headset"
       },
       "outputB": {
-        "name": "Desktop Speaker",
+        "name": "Desk Speaker",
         "type": "Speaker"
       },
       "inputA": {
-        "name": "Headset Max",
+        "name": "Headset",
         "type": "Headset"
-      },
-      "inputB": {
-        "name": "-",
-        "type": "-"
-      },
-      // The default path for x64 is ".\\Resources\\Executables\\svcl.exe" as this version is already shipped with the binaries.
-      // If you need the x32 version, you either replace the "svcl.exe" or adjust the path to your download.
-      "executablePath": ".\\Resources\\Executables\\svcl.exe",
-      // The default value is "1000".
-      // It means, that the plugins syncs with the Windows audio settings every 1000 milliseconds.
-      // Reduce the value if you need it to be more accurate.
-      // Increase it, if you want to reduce the system load.
-      "monitoringRateInMS": 1000
+      }
     }
     ```
-5. Restart Loupedeck. You can now use the plugin.
+6. Restart Loupedeck, the plugin is now ready for use.
 
 # 4. How to support, give feedback or contribute?
 

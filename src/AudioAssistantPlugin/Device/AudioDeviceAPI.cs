@@ -4,7 +4,7 @@
   public class AudioDeviceAPI : GenericAPI {
     protected readonly String _name;
 
-    public AudioDeviceAPI(String executablePath, String name) : base(executablePath) {
+    public AudioDeviceAPI(String exePath, String name) : base(exePath) {
       _name = name;
     }
 

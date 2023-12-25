@@ -10,7 +10,7 @@
     public AudioDeviceConfig InputA { get; set; }
     public AudioDeviceConfig InputB { get; set; }
 
-    public String ExecutablePath { get; set; }
+    public String ExePath { get; set; }
     public Int32 MonitoringRateInMS { get; set; }
 
     public static Config CreateOrLoad() {
@@ -22,35 +22,21 @@
 
       var configFilePath = Path.Combine(pluginPath, "config.json");
 
-      if (File.Exists(configFilePath)) {
-        var existingConfig = JsonHelpers.DeserializeAnyObjectFromFile<Config>(configFilePath);
+      return File.Exists(configFilePath)
+        ? UseExistingConfig(configFilePath)
+        : UseDefaultConfig(configFilePath);
+    }
 
-        #if LOGGING
-        Logger.Verbose($"Existing config loaded: {JsonHelpers.SerializeAnyObject(existingConfig)}");
-        #endif
-
-        return existingConfig;
-      }
-
+    private static Config UseDefaultConfig(String configFilePath) {
       var defaultConfig = new Config {
-        ExecutablePath = @".\Resources\Executables\svcl.exe",
         InputA = new AudioDeviceConfig {
           Name = "Microphone",
           Type = "Microphone"
         },
-        InputB = new AudioDeviceConfig {
-          Name = "-",
-          Type = "-"
-        },
         OutputA = new AudioDeviceConfig {
           Name = "Headset",
           Type = "Headset"
-        },
-        OutputB = new AudioDeviceConfig {
-          Name = "Speaker",
-          Type = "Speaker"
-        },
-        MonitoringRateInMS = 1000
+        }
       };
       JsonHelpers.SerializeAnyObjectToFile(defaultConfig, configFilePath);
 
@@ -59,6 +45,50 @@
       #endif
 
       return defaultConfig;
+    }
+
+    private static Config UseExistingConfig(String configFilePath) {
+      var existingConfig = JsonHelpers.DeserializeAnyObjectFromFile<Config>(configFilePath);
+
+      EnrichExistingConfigWithDefaults(existingConfig);
+
+      #if LOGGING
+      Logger.Verbose($"Existing config loaded: {JsonHelpers.SerializeAnyObject(existingConfig)}");
+      #endif
+
+      return existingConfig;
+    }
+
+    private static void EnrichExistingConfigWithDefaults(Config existingConfig) {
+      if (string.IsNullOrWhiteSpace(existingConfig.ExePath))
+        existingConfig.ExePath = Path.Combine(AudioAssistant.RootPath, "Resources", "SoundVolumeCommandLine", "svcl.exe");
+
+      if (existingConfig.MonitoringRateInMS == default)
+        existingConfig.MonitoringRateInMS = 2500;
+
+      if (existingConfig.OutputB == default)
+        existingConfig.OutputB = new AudioDeviceConfig {
+          Name = "-",
+          Type = "-"
+        };
+
+      if (string.IsNullOrWhiteSpace(existingConfig.OutputB.Name))
+        existingConfig.OutputB.Name = "-";
+
+      if (string.IsNullOrWhiteSpace(existingConfig.OutputB.Type))
+        existingConfig.OutputB.Type = "-";
+
+      if (existingConfig.InputB == default)
+        existingConfig.InputB = new AudioDeviceConfig {
+          Name = "-",
+          Type = "-"
+        };
+
+      if (string.IsNullOrWhiteSpace(existingConfig.InputB.Name))
+        existingConfig.InputB.Name = "-";
+
+      if (string.IsNullOrWhiteSpace(existingConfig.InputB.Type))
+        existingConfig.InputB.Type = "-";
     }
   }
 }
