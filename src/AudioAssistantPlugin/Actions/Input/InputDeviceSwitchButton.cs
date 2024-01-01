@@ -1,9 +1,13 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
-  public class ActionInputSwitch : ActionBaseSwitch {
+  public class InputDeviceSwitchButton : BaseDeviceSwitchButton {
     protected override ActiveDevice ActiveDevice => AudioAssistant.ActiveInput;
     protected override Device DeviceOptionA => AudioAssistant.InputA;
     protected override Device DeviceOptionB => AudioAssistant.InputB;
 
-    public ActionInputSwitch() : base("Audio Input Switch", "You can switch between input device option a and b.", "Input") { }
+    public InputDeviceSwitchButton() : base(
+      "Input Control",
+      "Switch Active Input Device",
+      "Switch between input device option a and b."
+    ) { }
   }
 }

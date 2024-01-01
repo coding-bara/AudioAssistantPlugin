@@ -18,7 +18,7 @@ namespace Loupedeck.AudioAssistantPlugin {
     public static ActiveDevice ActiveOutput;
     public static ActiveDevice ActiveInput;
 
-    public readonly DeviceStateMonitoring _stateMonitoring;
+    private readonly DeviceStateMonitoring _stateMonitoring;
 
     public AudioAssistant() {
       Logger.Init(Log);
@@ -27,14 +27,15 @@ namespace Loupedeck.AudioAssistantPlugin {
       RootPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), nameof(Loupedeck), "Plugins", nameof(AudioAssistant), "win");
 
       var config = Config.CreateOrLoad();
+      var api = new ToolAPI(config.ExePath);
 
       ActiveOutput = new ActiveDevice("Output");
-      OutputA = new Device(new DeviceAPI(config.ExePath, config.OutputA.Name), config.OutputA.Name, config.OutputA.Type);
-      OutputB = new Device(new DeviceAPI(config.ExePath, config.OutputB.Name), config.OutputB.Name, config.OutputB.Type);
+      OutputA = new Device(api, config.OutputA.Name, config.OutputA.Type);
+      OutputB = new Device(api, config.OutputB.Name, config.OutputB.Type);
 
       ActiveInput = new ActiveDevice("Input");
-      InputA = new Device(new DeviceAPI(config.ExePath, config.InputA.Name), config.InputA.Name, config.InputA.Type);
-      InputB = new Device(new DeviceAPI(config.ExePath, config.InputB.Name), config.InputB.Name, config.InputB.Type);
+      InputA = new Device(api, config.InputA.Name, config.InputA.Type);
+      InputB = new Device(api, config.InputB.Name, config.InputB.Type);
 
       _stateMonitoring = new DeviceStateMonitoring(
         config,
@@ -54,17 +55,17 @@ namespace Loupedeck.AudioAssistantPlugin {
       OutputB.Init();
 
       if (OutputA.IsDefault())
-        ActiveOutput.Instance = OutputA;
+        ActiveOutput.I = OutputA;
       else
-        ActiveOutput.Instance = OutputB;
+        ActiveOutput.I = OutputB;
 
       InputA.Init();
       InputB.Init();
 
       if (InputA.IsDefault())
-        ActiveInput.Instance = InputA;
+        ActiveInput.I = InputA;
       else
-        ActiveInput.Instance = InputB;
+        ActiveInput.I = InputB;
 
       _stateMonitoring.Start();
     }

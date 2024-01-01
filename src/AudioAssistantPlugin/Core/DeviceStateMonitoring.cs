@@ -38,23 +38,17 @@
             if (device.Name == "-")
               continue;
 
-            ThreadedDeviceMonitoring(device.Name, device.API, device.State);
+            try {
+              if (device.IsDefault())
+                device.Sync();
+            } catch (Exception e) {
+              Logger.Error(e, $"ThreadedMonitoring(device={device.Name}) failed with message: '{e.Message}'.");
+            }
           }
 
           Thread.Sleep(_monitoringRateInMs);
         }
       };
-    }
-
-    private void ThreadedDeviceMonitoring(String name, DeviceAPI api, DeviceState state) {
-      try {
-        if (api.IsDefault()) {
-          state.IsMuted = api.IsMuted();
-          state.Volume = api.GetVolume();
-        }
-      } catch (Exception e) {
-        Logger.Error(e, $"ThreadedDeviceMonitoring(device={name}) failed with message: '{e.Message}'.");
-      }
     }
   }
 }

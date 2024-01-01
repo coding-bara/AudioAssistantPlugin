@@ -1,13 +1,15 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
+  using System.IO;
 
   public class Device {
-    private readonly DeviceAPI _api;
-    private readonly DeviceState _state;
+    private readonly ToolAPI _api;
     private readonly String _name;
     private readonly String _type;
 
-    public Device(DeviceAPI api, String name, String type) {
+    private readonly DeviceState _state;
+
+    public Device(ToolAPI api, String name, String type) {
       _api = api;
       _name = name;
       _type = type;
@@ -15,20 +17,14 @@
       _state = new DeviceState();
     }
 
-    public void Init() {
-      _state.IsMuted = _api.IsMuted();
-      _state.Volume = _api.GetVolume();
-    }
+    public void Init() => Sync();
 
-    public event DeviceState.StateChangedEvent StateChanged {
-      add => _state.StateChanged += value;
-      remove => _state.StateChanged -= value;
+    public event DeviceState.HasChangedEvent StateHasChanged {
+      add => _state.HasChanged += value;
+      remove => _state.HasChanged -= value;
     }
 
     public String Name => _name;
-    public String Type => _type;
-    public DeviceAPI API => _api;
-    public DeviceState State => _state;
 
     public void ChangeVolume(Int32 volumeStep) {
       if (_state.IsMuted)
@@ -39,7 +35,7 @@
       if (newVolume == _state.Volume)
         return;
 
-      _api.ChangeVolume(volumeStep);
+      _api.ChangeVolume(_name, volumeStep);
       _state.Volume = newVolume;
     }
 
@@ -51,23 +47,44 @@
     }
 
     public void Unmute() {
-      _api.Unmute();
-      _state.IsMuted = _api.IsMuted();
+      _api.Unmute(_name);
+      _state.IsMuted = _api.IsMuted(_name);
     }
 
     public void Mute() {
-      _api.Mute();
-      _state.IsMuted = _api.IsMuted();
+      _api.Mute(_name);
+      _state.IsMuted = _api.IsMuted(_name);
     }
 
-    public Boolean IsDefault() => _api.IsDefault();
+    public Boolean IsDefault() => _api.IsDefault(_name);
 
-    public void SetAsDefault() {
-      _api.SetAsDefault();
+    public void SetAsDefault() => _api.SetAsDefault(_name);
+
+    public void Sync() {
+      _state.IsMuted = _api.IsMuted(_name);
+      _state.Volume = _api.GetVolume(_name);
     }
 
-    public String GetDialValue() => _state.IsMuted
+    public String GetKnobText() => _state.IsMuted
       ? "-"
       : _state.Volume.ToString();
+
+    public BitmapImage GetKnobIcon(String category) {
+      var filePath = _state.IsMuted
+        ? Path.Combine(GetIconBasePath(50), $"{category}.Muted.png")
+        : Path.Combine(GetIconBasePath(50), $"{category}.Normal.png");
+
+      return BitmapImage.FromFile(filePath);
+    }
+
+    public BitmapImage GetButtonIcon(String category, String state) {
+      var filePath = state != default
+        ? Path.Combine(GetIconBasePath(80), category, $"{_type}.{state}.png")
+        : Path.Combine(GetIconBasePath(80), category, $"{_type}.png");
+
+      return BitmapImage.FromFile(filePath);
+    }
+
+    private String GetIconBasePath(Int32 size) => Path.Combine(AudioAssistant.RootPath, "Resources", "Icons", $"Size{size}x{size}");
   }
 }
