@@ -2,7 +2,7 @@
   using System;
 
   public interface IKnobAction {
-    void OnKnobSetup();
+    Boolean OnKnobSetup();
 
     void OnKnobTeardown();
 
@@ -10,9 +10,9 @@
 
     Boolean OnKnobTurn(Int32 steps);
 
-    String GetKnobText();
+    String GetKnobValue();
 
-    BitmapImage GetKnobIcon();
+    BitmapImage GetKnobIcon(PluginImageSize imageSize);
 
     void UpdateKnobIcon();
 

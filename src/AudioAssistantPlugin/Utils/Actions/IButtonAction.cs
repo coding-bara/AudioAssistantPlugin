@@ -4,11 +4,11 @@
   public interface IButtonAction {
     Boolean OnButtonPress();
 
-    String GetButtonText();
+    String GetButtonValue();
 
-    BitmapImage GetButtonIcon();
+    BitmapImage GetButtonIcon(PluginImageSize imageSize);
 
-    void OnButtonSetup();
+    Boolean OnButtonSetup();
 
     void OnButtonTeardown();
 

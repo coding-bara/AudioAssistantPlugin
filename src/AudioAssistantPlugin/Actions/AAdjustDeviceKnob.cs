@@ -1,16 +1,18 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
 
-  public abstract class BaseDeviceVolumeKnob : BaseKnobAction {
-    protected BaseDeviceVolumeKnob(String actionGroup, String actionName, String actionDescription) : base(actionGroup, actionName, actionDescription) { }
+  public abstract class AAdjustDeviceKnob : BaseKnob {
+    protected AAdjustDeviceKnob(String actionGroup, String actionName, String actionDescription) : base(actionGroup, actionName, actionDescription) { }
 
     protected abstract ActiveDevice ActiveDevice { get; }
 
-    public override void OnKnobSetup() {
+    public override Boolean OnKnobSetup() {
       ActiveDevice.PreSwitch += OnDevicePreSwitch;
 
       if (ActiveDevice.I != null)
         ActiveDevice.I.StateHasChanged += UpdateKnob;
+
+      return true;
     }
 
     public override void OnKnobTeardown() {
@@ -42,8 +44,8 @@
       return true;
     }
 
-    public override BitmapImage GetKnobIcon() => ActiveDevice.I.GetKnobIcon(ActiveDevice.Category);
+    public override BitmapImage GetKnobIcon(PluginImageSize _) => ActiveDevice.I.GetKnobIcon(GetIconBasePath(50), ActiveDevice.Category);
 
-    public override String GetKnobText() => ActiveDevice.I.GetKnobText();
+    public override String GetKnobValue() => ActiveDevice.I.GetKnobText();
   }
 }

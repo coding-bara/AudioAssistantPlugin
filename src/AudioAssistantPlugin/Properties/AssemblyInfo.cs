@@ -1,11 +1,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Audio Assistant Plugin for Loupedeck")]
+[assembly: AssemblyTitle("Audio Assistant Plugin")]
 [assembly: AssemblyDescription("Allows to control audio input and output devices.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("coding-bara")]
-[assembly: AssemblyProduct("Audio Assistant Plugin")]
+[assembly: AssemblyProduct("Audio Assistant")]
 [assembly: AssemblyCopyright("Copyright (c) 2024 coding-bara. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

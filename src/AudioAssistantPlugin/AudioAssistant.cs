@@ -7,7 +7,8 @@ namespace Loupedeck.AudioAssistantPlugin {
     public override Boolean UsesApplicationApiOnly => true;
     public override Boolean HasNoApplication => true;
 
-    public static String RootPath;
+    public static String PluginPath;
+    public static String ResourcesPath;
 
     public static Device OutputA;
     public static Device OutputB;
@@ -24,9 +25,13 @@ namespace Loupedeck.AudioAssistantPlugin {
       Logger.Init(Log);
       Resources.Init(Assembly);
 
-      RootPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), nameof(Loupedeck), "Plugins", nameof(AudioAssistant), "win");
+      ResourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), nameof(Loupedeck), "Plugins", nameof(AudioAssistant), "win", "Resources");
+      PluginPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".loupedeck", nameof(AudioAssistant));
 
-      var config = Config.CreateOrLoad();
+      if (!Directory.Exists(PluginPath))
+        Directory.CreateDirectory(PluginPath);
+
+      var config = ConfigLoader.Load();
       var api = new ToolAPI(config.ExePath);
 
       ActiveOutput = new ActiveDevice("Output");

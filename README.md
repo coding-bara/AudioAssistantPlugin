@@ -28,7 +28,7 @@ If you need the x32 version, you can download it [here](https://www.nirsoft.net/
 1. Fire up Loupedeck.
 2. Install a binary release of the plugin.
 3. Restart Loupedeck. A default `config.json` has now been generated for you.
-4. You can find the `config.json` in here: `%userprofile%\.loupedeck\audio-assistant`.
+4. You can find the `config.json` in here: `%userprofile%\.loupedeck\AudioAssistant`.
 5. Edit it to your needs, like described below:
    ```json5
     // entire, possible config.json

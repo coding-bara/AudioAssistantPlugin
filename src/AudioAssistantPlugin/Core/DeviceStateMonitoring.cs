@@ -31,9 +31,9 @@
       _thread?.Join();
     }
 
-    private ThreadStart ThreadedMonitoring() {
-      return () => {
-        while (!_cts.Token.IsCancellationRequested) {
+    private ThreadStart ThreadedMonitoring() => () => {
+      try {
+        while (_cts?.Token != null && !_cts.Token.IsCancellationRequested) {
           foreach (var device in _devices) {
             if (device.Name == "-")
               continue;
@@ -48,7 +48,7 @@
 
           Thread.Sleep(_monitoringRateInMs);
         }
-      };
-    }
+      } catch (ObjectDisposedException) { }
+    };
   }
 }

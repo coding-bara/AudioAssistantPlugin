@@ -69,22 +69,18 @@
       ? "-"
       : _state.Volume.ToString();
 
-    public BitmapImage GetKnobIcon(String category) {
+    public BitmapImage GetKnobIcon(String basePath, String category) {
       var filePath = _state.IsMuted
-        ? Path.Combine(GetIconBasePath(50), $"{category}.Muted.png")
-        : Path.Combine(GetIconBasePath(50), $"{category}.Normal.png");
+        ? Path.Combine(basePath, $"{category}.Muted.png")
+        : Path.Combine(basePath, $"{category}.Normal.png");
 
       return BitmapImage.FromFile(filePath);
     }
 
-    public BitmapImage GetButtonIcon(String category, String state) {
-      var filePath = state != default
-        ? Path.Combine(GetIconBasePath(80), category, $"{_type}.{state}.png")
-        : Path.Combine(GetIconBasePath(80), category, $"{_type}.png");
+    public BitmapImage GetButtonIcon(String basePath, String category) {
+      var filePath = Path.Combine(basePath, category, $"{_type}.png");
 
       return BitmapImage.FromFile(filePath);
     }
-
-    private String GetIconBasePath(Int32 size) => Path.Combine(AudioAssistant.RootPath, "Resources", "Icons", $"Size{size}x{size}");
   }
 }

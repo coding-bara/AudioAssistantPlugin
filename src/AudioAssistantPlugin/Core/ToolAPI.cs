@@ -4,19 +4,19 @@
   public class ToolAPI : GenericAPI {
     public ToolAPI(String exePath) : base(exePath) { }
 
-    public Int32 GetVolume(String name) => RunCommand($"/GetColumnValue \"{name}\" \"Volume Percent\"", RawOutputParser.GetVolume);
+    public Int32 GetVolume(String deviceName) => RunCommand($"/GetColumnValue \"{deviceName}\" \"Volume Percent\"", RawOutputParser.GetVolume);
 
-    public void ChangeVolume(String name, Int32 volumeStep) => RunCommand($"/ChangeVolume \"{name}\" {volumeStep}");
+    public void ChangeVolume(String deviceName, Int32 volumeStep) => RunCommand($"/ChangeVolume \"{deviceName}\" {volumeStep}");
 
-    public void Unmute(String name) => RunCommand($"/Unmute \"{name}\"");
+    public void Unmute(String deviceName) => RunCommand($"/Unmute \"{deviceName}\"");
 
-    public void Mute(String name) => RunCommand($"/Mute \"{name}\"");
+    public void Mute(String deviceName) => RunCommand($"/Mute \"{deviceName}\"");
 
-    public Boolean IsMuted(String name) => RunCommand($"/GetColumnValue \"{name}\" \"Muted\"", RawOutputParser.IsMuted);
+    public Boolean IsMuted(String deviceName) => RunCommand($"/GetColumnValue \"{deviceName}\" \"Muted\"", RawOutputParser.IsMuted);
 
-    public void SetAsDefault(String name) => RunCommand($"/SetDefault \"{name}\" \"all\"");
+    public void SetAsDefault(String deviceName) => RunCommand($"/SetDefault \"{deviceName}\" \"all\"");
 
-    public Boolean IsDefault(String name) => RunCommand($"/GetColumnValue \"{name}\" \"Default\"", RawOutputParser.IsDefault);
+    public Boolean IsDefault(String deviceName) => RunCommand($"/GetColumnValue \"{deviceName}\" \"Default\"", RawOutputParser.IsDefault);
 
     public static class RawOutputParser {
       public static Int32 GetVolume(String[] data) {

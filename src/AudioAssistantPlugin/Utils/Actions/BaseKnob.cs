@@ -1,15 +1,18 @@
 ﻿namespace Loupedeck.AudioAssistantPlugin {
   using System;
+  using System.IO;
 
-  public abstract class BaseKnobAction : PluginDynamicAdjustment, IKnobAction {
-    protected BaseKnobAction(String actionGroup, String actionName, String actionDescription) : base(actionName, actionDescription, actionGroup, true) { }
+  public abstract class BaseKnob : PluginDynamicAdjustment, IKnobAction {
+    protected BaseKnob(String actionGroup, String actionName, String actionDescription) : base(actionName, actionDescription, actionGroup, true) { }
 
     protected override Boolean OnLoad() {
-      OnKnobSetup();
+      if (OnKnobSetup()) {
+        UpdateKnob();
 
-      UpdateKnob();
+        return base.OnLoad();
+      }
 
-      return base.OnLoad();
+      return false;
     }
 
     protected override Boolean OnUnload() {
@@ -41,20 +44,22 @@
       UpdateKnobIcon();
     }
 
-    protected override String GetAdjustmentValue(String _) => GetKnobText();
+    protected override String GetAdjustmentValue(String _) => GetKnobValue();
 
-    protected override BitmapImage GetAdjustmentImage(String _, PluginImageSize __) => GetKnobIcon();
+    protected override BitmapImage GetAdjustmentImage(String _, PluginImageSize imageSize) => GetKnobIcon(imageSize);
 
     public virtual Boolean OnKnobPress() => false;
 
     public virtual Boolean OnKnobTurn(Int32 steps) => false;
 
-    public virtual String GetKnobText() => default;
+    public virtual String GetKnobValue() => default;
 
-    public virtual BitmapImage GetKnobIcon() => default;
+    public virtual BitmapImage GetKnobIcon(PluginImageSize imageSize) => default;
 
-    public virtual void OnKnobSetup() { }
+    public virtual Boolean OnKnobSetup() => true;
 
     public virtual void OnKnobTeardown() { }
+
+    protected String GetIconBasePath(Int32 size) => Path.Combine(AudioAssistant.ResourcesPath, "Icons", $"Size{size}x{size}");
   }
 }

@@ -63,24 +63,24 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Actions\AdjustDeviceKnobInput.cs"/>
+        <Compile Include="Actions\AdjustDeviceKnobOutput.cs"/>
+        <Compile Include="Actions\SwitchDeviceButtonInput.cs"/>
+        <Compile Include="Actions\SwitchDeviceButtonOutput.cs"/>
         <Compile Include="AudioAssistantApplication.cs"/>
         <Compile Include="AudioAssistant.cs"/>
-        <Compile Include="Actions\BaseDeviceVolumeKnob.cs"/>
-        <Compile Include="Actions\BaseDeviceSwitchButton.cs"/>
-        <Compile Include="Actions\Input\InputDeviceVolumeKnob.cs"/>
-        <Compile Include="Actions\Input\InputDeviceSwitchButton.cs"/>
-        <Compile Include="Actions\Output\OutputDeviceVolumeKnob.cs"/>
-        <Compile Include="Actions\Output\OutputDeviceSwitchButton.cs"/>
+        <Compile Include="Actions\AAdjustDeviceKnob.cs"/>
+        <Compile Include="Actions\ASwitchDeviceButton.cs"/>
         <Compile Include="Core\Device.cs"/>
         <Compile Include="Core\ToolAPI.cs"/>
-        <Compile Include="Core\DeviceConfig.cs"/>
         <Compile Include="Core\ActiveDevice.cs"/>
         <Compile Include="Core\DeviceState.cs"/>
         <Compile Include="Core\DeviceStateMonitoring.cs"/>
-        <Compile Include="Utils\Facade\BaseButtonAction.cs"/>
-        <Compile Include="Utils\Facade\BaseKnobAction.cs"/>
-        <Compile Include="Utils\Facade\IButtonAction.cs"/>
-        <Compile Include="Utils\Facade\IKnobAction.cs"/>
+        <Compile Include="Utils\ConfigLoader.cs"/>
+        <Compile Include="Utils\Actions\BaseButton.cs"/>
+        <Compile Include="Utils\Actions\BaseKnob.cs"/>
+        <Compile Include="Utils\Actions\IButtonAction.cs"/>
+        <Compile Include="Utils\Actions\IKnobAction.cs"/>
         <Compile Include="Utils\GenericAPI.cs"/>
         <Compile Include="Utils\Config.cs"/>
         <Compile Include="Utils\Logger.cs"/>
@@ -121,31 +121,16 @@
         <EmbeddedResource Include="Resources\Icons\Size50x50\Input.Normal.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Headset.NoOtherOptionsConfigured.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Headset.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Speaker.NoOtherOptionsConfigured.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Speaker.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Microphone.NoOtherOptionsConfigured.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Microphone.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headset.NoOtherOptionsConfigured.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headset.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.NoOtherOptionsConfigured.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headphones.png">
