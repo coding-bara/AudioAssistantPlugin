@@ -46,12 +46,12 @@ If you need the x32 version, you can download it [here](https://www.nirsoft.net/
       // Option A, needs to be specified
       "inputA": {
         "name": "Headset", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
-        "type": "Headset" // Use one of these: "Headset" or "Microphone".
+        "type": "Headset" // Use one of these: "Headset", "Webcam" or "Microphone".
       },
       // Option B, only needs to be specified if you also have another input device.
       "inputB": {
         "name": "Desk Microphone", // Use the name from "system" > "sound" > "volume mixer" > "input/output device".
-        "type": "Microphone" // Use one of these: "Headset" or "Microphone".
+        "type": "Microphone" // Use one of these: "Headset", "Webcam" or "Microphone".
       },
       // Only needs to be specified if you want to control the sync rate with Windows.
       // The default is at "2500" milliseconds.
