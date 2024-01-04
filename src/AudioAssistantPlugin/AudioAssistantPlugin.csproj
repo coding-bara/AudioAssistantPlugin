@@ -130,6 +130,9 @@
         <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Microphone.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Icons\Size80x80\Input\Webcam.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
         <EmbeddedResource Include="Resources\Icons\Size80x80\Output\Headset.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
