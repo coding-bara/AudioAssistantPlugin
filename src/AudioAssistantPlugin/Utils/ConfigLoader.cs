@@ -47,7 +47,7 @@
       if (string.IsNullOrWhiteSpace(existingConfig.ExePath))
         existingConfig.ExePath = Path.Combine(AudioAssistant.ResourcesPath, "SoundVolumeCommandLine", "svcl.exe");
 
-      if (existingConfig.MonitoringRateInMS == default)
+      if (existingConfig.MonitoringRateInMS == default || existingConfig.MonitoringRateInMS <= 0)
         existingConfig.MonitoringRateInMS = 2500;
 
       if (existingConfig.OutputB == default)

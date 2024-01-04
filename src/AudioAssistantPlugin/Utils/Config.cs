@@ -16,6 +16,6 @@
     public DeviceConfig InputB { get; set; }
 
     public String ExePath { get; set; }
-    public Int32 MonitoringRateInMS { get; set; }
+    public Int32 MonitoringRateInMS { get; set; } = 2500;
   }
 }
