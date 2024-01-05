@@ -40,7 +40,7 @@
         Logger.Verbose($"'{_exePath} {command}' succeeded with output: {parsedOutput}. ({exitCode})");
         #endif
       } catch (Exception e) {
-        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}'.");
+        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}' and stack trace: '{e.StackTrace}'.");
       }
 
       return parsedOutput;
@@ -67,7 +67,7 @@
         Logger.Verbose($"'{_exePath} {command}' succeeded. ({exitCode})");
         #endif
       } catch (Exception e) {
-        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}'.");
+        Logger.Error(e, $"'{_exePath} {command}' failed with message: '{e.Message}' and stack trace: '{e.StackTrace}'.");
       }
     }
   }
