@@ -30,7 +30,7 @@ namespace Loupedeck.AudioAssistantPlugin {
       if (!Directory.Exists(pluginPath))
         Directory.CreateDirectory(pluginPath);
 
-      var config = new ConfigLoader(pluginPath).Load();
+      var config = new ConfigLoader(pluginPath, resourcesPath).Load();
       var api = new ToolAPI(config.ExePath);
 
       ResourcesPath = resourcesPath;

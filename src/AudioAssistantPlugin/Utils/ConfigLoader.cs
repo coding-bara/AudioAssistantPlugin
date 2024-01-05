@@ -4,9 +4,11 @@
 
   public class ConfigLoader {
     private readonly String _pluginPath;
+    private readonly String _resourcesPath;
 
-    public ConfigLoader(String pluginPath) {
+    public ConfigLoader(String pluginPath, String resourcesPath) {
       _pluginPath = pluginPath;
+      _resourcesPath = resourcesPath;
     }
 
     public Config Load() {
@@ -51,7 +53,7 @@
 
     private void EnrichExistingConfigWithDefaults(Config existingConfig) {
       if (string.IsNullOrWhiteSpace(existingConfig.ExePath))
-        existingConfig.ExePath = Path.Combine(AudioAssistant.ResourcesPath, "SoundVolumeCommandLine", "svcl.exe");
+        existingConfig.ExePath = Path.Combine(_resourcesPath, "SoundVolumeCommandLine", "svcl.exe");
 
       if (existingConfig.MonitoringRateInMS == default || existingConfig.MonitoringRateInMS <= 0)
         existingConfig.MonitoringRateInMS = 2500;
