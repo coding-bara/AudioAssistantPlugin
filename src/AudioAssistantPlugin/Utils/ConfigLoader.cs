@@ -3,15 +3,21 @@
   using System.IO;
 
   public class ConfigLoader {
-    public static Config Load() {
-      var configFilePath = Path.Combine(AudioAssistant.PluginPath, "config.json");
+    private readonly String _pluginPath;
+
+    public ConfigLoader(String pluginPath) {
+      _pluginPath = pluginPath;
+    }
+
+    public Config Load() {
+      var configFilePath = Path.Combine(_pluginPath, "config.json");
 
       return File.Exists(configFilePath)
         ? UseExistingConfig(configFilePath)
         : UseDefaultConfig(configFilePath);
     }
 
-    private static Config UseDefaultConfig(String configFilePath) {
+    private Config UseDefaultConfig(String configFilePath) {
       var defaultConfig = new Config {
         InputA = new DeviceConfig {
           Name = "Microphone",
@@ -31,7 +37,7 @@
       return defaultConfig;
     }
 
-    private static Config UseExistingConfig(String configFilePath) {
+    private Config UseExistingConfig(String configFilePath) {
       var existingConfig = JsonHelpers.DeserializeAnyObjectFromFile<Config>(configFilePath);
 
       EnrichExistingConfigWithDefaults(existingConfig);
@@ -43,7 +49,7 @@
       return existingConfig;
     }
 
-    private static void EnrichExistingConfigWithDefaults(Config existingConfig) {
+    private void EnrichExistingConfigWithDefaults(Config existingConfig) {
       if (string.IsNullOrWhiteSpace(existingConfig.ExePath))
         existingConfig.ExePath = Path.Combine(AudioAssistant.ResourcesPath, "SoundVolumeCommandLine", "svcl.exe");
 
